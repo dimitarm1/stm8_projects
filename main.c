@@ -40,9 +40,13 @@
 #define CCR1_Val  ((uint16_t)32767)
 #define CCR2_Val  ((uint16_t)16383)
 #define CCR3_Val  ((uint16_t)8191)
+#define LED_GPIO_PORT  (GPIOB)
+#define LED_GPIO_PINS  (GPIO_PIN_5)
+
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
+void Delay(uint16_t nCount);
 static void TIM1_Config(void);
 /* Private functions ---------------------------------------------------------*/
 /* Public functions ----------------------------------------------------------*/
@@ -54,13 +58,36 @@ static void TIM1_Config(void);
   */
 void main(void)
 {
+  /* Initialize I/Os in Output Mode */
+  GPIO_Init(LED_GPIO_PORT, (GPIO_Pin_TypeDef)LED_GPIO_PINS, GPIO_MODE_OUT_PP_LOW_FAST);
+
+  while (1)
+  {
+    /* Toggles LEDs */
+    GPIO_WriteReverse(LED_GPIO_PORT, (GPIO_Pin_TypeDef)LED_GPIO_PINS);
+    Delay(0xFFFF);
+  }
   /* TIM1 configuration -----------------------------------------*/
   TIM1_Config(); 
+
   
   while (1)
   {}
 }
 
+/**
+  * @brief Delay
+  * @param nCount
+  * @retval None
+  */
+void Delay(uint16_t nCount)
+{
+  /* Decrement nCount value */
+  while (nCount != 0)
+  {
+    nCount--;
+  }
+}
 /**
   * @brief  Configure TIM1 to generate 3 complementary signals, to insert a 
   *         defined dead time value, to use the break feature and to lock the 
