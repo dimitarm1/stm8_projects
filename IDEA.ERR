@@ -1,0 +1,139 @@
+#error cpstm8 uart.h:29(7+2) missing ;
+#error cpstm8 uart.h:30(7+2) missing ;
+#error cpstm8 uart.h:31(7+2) missing ;
+#error cpstm8 uart.h:34(20+2) missing )
+#error cpstm8 uart.h:36(15+2) missing )
+#error cpstm8 uart.h:37(27) print_long not an argument
+#error cpstm8 uart.h:38(24) error_msg not an argument
+#error cpstm8 uart.h:39(15) uart_init not an argument
+#error cpstm8 uart.h:39(16) useless argument list
+#error cpstm8 uart.h:41(15+2) missing )
+#error cpstm8 interrupts.h:25 can't open stm8l.h
+#error cpstm8 interrupts.h:28(35) missing )
+#error cpstm8 interrupts.h:31(35) missing )
+#error cpstm8 interrupts.h:34(35) missing )
+#error cpstm8 interrupts.h:37(42) missing )
+#error cpstm8 interrupts.h:40(42) missing )
+#error cpstm8 interrupts.h:43(42) missing )
+#error cpstm8 interrupts.h:46(42) missing )
+#error cpstm8 interrupts.h:49(42) missing )
+#error cpstm8 interrupts.h:65(35) missing )
+#error cpstm8 interrupts.h:68(52) missing )
+#error cpstm8 interrupts.h:71(44) missing )
+#error cpstm8 interrupts.h:82(48) missing )
+#error cpstm8 interrupts.h:85(44) missing )
+#error cpstm8 interrupts.h:100(40) missing )
+#error cpstm8 interrupts.h:103(40) missing )
+#error cpstm8 interrupts.h:107(35) missing )
+#error cpstm8 interrupts.h:130(36) missing )
+#error cpstm8 interrupts.h:138(44) missing )
+#error cpstm8 interrupts.h:142(42) missing )
+#error cpstm8 uart.c:27(0+2) missing ;
+#error cpstm8 uart.c:28(0+2) missing ;
+#error cpstm8 uart.c:29(0+2) missing ;
+#error cpstm8 uart.c:35(20+2) missing )
+#error cpstm8 uart.c:37(12+4) invalid initializer expression
+#error cpstm8 uart.c:37(16) missing ;
+#error cpstm8 uart.c:42(34) incomplete declaration
+#error cpstm8 uart.c:43(2+9) missing ;
+#error cpstm8 uart.c:44(11) redeclared external UART2_DR
+#error cpstm8 uart.c:44(17+2) invalid indirection operand
+#error cpstm8 uart.c:44(19) missing ;
+#error cpstm8 uart.c:55(10) incomplete declaration
+#error cpstm8 uart.c:56(2+4) redeclared external byte
+#error cpstm8 uart.c:56(34) invalid pointer initializer
+#error cpstm8 uart.c:56(35) missing ;
+#error cpstm8 uart.c:57(1) incomplete declaration
+#error cpstm8 uart.c:57(36) incomplete declaration
+#error cpstm8 uart.c:58(9) incomplete declaration
+#error cpstm8 uart.c:62(25) incomplete declaration
+#error cpstm8 uart.c:63(1+2) missing ;
+#error cpstm8 uart.c:65(1+2) missing ;
+#error cpstm8 uart.c:65(20) missing ;
+#error cpstm8 uart.c:66(43) incomplete declaration
+#error cpstm8 uart.c:67(10) incomplete declaration
+#error cpstm8 uart.c:67(12) missing ;
+#error cpstm8 uart.c:67(20) missing ;
+#error cpstm8 uart.c:69(18) missing {
+#error cpstm8 uart.c:70(1+2) redeclared external ch
+#error cpstm8 uart.c:70(7) missing ;
+#error cpstm8 uart.c:73(23) incomplete declaration
+#error cpstm8 uart.c:74(8) incomplete declaration
+#error cpstm8 uart.c:76(24) incomplete declaration
+#error cpstm8 uart.c:77(7) incomplete declaration
+#error cpstm8 uart.c:79(34) incomplete declaration
+#error cpstm8 uart.c:80(7) incomplete declaration
+#error cpstm8 uart.c:83(18) incomplete declaration
+#error cpstm8 uart.c:84(17+2) invalid constant expression
+#error cpstm8 uart.c:84(21) redeclared external decimal_buff
+#error cpstm8 uart.c:84(27+3) invalid initializer expression
+#error cpstm8 uart.c:85(2+6) missing ;
+#error cpstm8 uart.c:85(15) missing ;
+#error cpstm8 uart.c:86(26) incomplete declaration
+#error cpstm8 uart.c:87(11) missing )
+#error cpstm8 uart.c:87(18) redeclared external uart_write
+#error cpstm8 uart.c:87(39) missing ;
+#error cpstm8 uart.c:95(12) incomplete declaration
+#error cpstm8 uart.c:97(21) redeclared external decimal_buff
+#error cpstm8 uart.c:98(16) redeclared external decimal_buff
+#error cpstm8 uart.c:98(18) missing {
+#error cpstm8 uart.c:99(1+2) redeclared external ch
+#error cpstm8 uart.c:99(8) missing ;
+#error cpstm8 uart.c:101(18) incomplete declaration
+#error cpstm8 uart.c:102(7) missing ;
+#error cpstm8 uart.c:105(18) incomplete declaration
+#error cpstm8 uart.c:106(17+2) invalid constant expression
+#error cpstm8 uart.c:106(21) redeclared external decimal_buff
+#error cpstm8 uart.c:106(27+3) invalid initializer expression
+#error cpstm8 uart.c:107(2+6) missing ;
+#error cpstm8 uart.c:107(15) missing ;
+#error cpstm8 uart.c:108(25) incomplete declaration
+#error cpstm8 uart.c:109(41) incomplete declaration
+#error cpstm8 uart.c:110(11) missing )
+#error cpstm8 uart.c:110(30) missing ;
+#error cpstm8 uart.c:114(30) incomplete declaration
+#error cpstm8 uart.c:117(1+2) missing ;
+#error cpstm8 uart.c:117(34) missing ;
+#error cpstm8 uart.c:119(35) incomplete declaration
+#error cpstm8 uart.c:121(11) incomplete declaration
+#error cpstm8 uart.c:122(11) incomplete declaration
+#error cpstm8 uart.c:124(32) incomplete declaration
+#error cpstm8 uart.c:126(2) redeclared external R
+#error cpstm8 uart.c:126(21+3) invalid initializer expression
+#error cpstm8 uart.c:126(24) missing ;
+#error cpstm8 uart.c:128(8) incomplete declaration
+#error cpstm8 uart.c:129(10) missing ;
+#error cpstm8 uart.c:131(32) incomplete declaration
+#error cpstm8 uart.c:132(25) incomplete declaration
+#error cpstm8 uart.c:133(16) invalid initializer expression
+#error cpstm8 uart.c:133(17) missing ;
+#error cpstm8 uart.c:134(22) incomplete declaration
+#error cpstm8 uart.c:135(8+6) invalid pointer initializer
+#error cpstm8 uart.c:135(14) missing ;
+#error cpstm8 uart.c:136(9) incomplete declaration
+#error cpstm8 uart.c:140(24) incomplete declaration
+#error cpstm8 uart.c:141(15) redeclared external uart_write
+#error cpstm8 uart.c:142(15) missing )
+#error cpstm8 uart.c:142(21) redeclared external UART_send_byte
+#error cpstm8 uart.c:146(12) missing ;
+#error cpstm8 uart.c:147(24) incomplete declaration
+#error cpstm8 uart.c:148(21) incomplete declaration
+#error cpstm8 uart.c:149(11) incomplete declaration
+#error cpstm8 uart.c:153(17) incomplete declaration
+#error cpstm8 uart.c:154(16+7) missing )
+#error cpstm8 uart.c:154(24+3) missing )
+#error cpstm8 uart.c:155(16+7) missing )
+#error cpstm8 uart.c:155(27) redeclared external UART_send_byte
+#error cpstm8 uart.c:155(29) missing ;
+#error cpstm8 uart.c:160(36) incomplete declaration
+#error cpstm8 uart.c:161(1+6) missing ;
+#error cpstm8 uart.c:166(43+13) invalid initializer expression
+#error cpstm8 uart.c:166(56) missing ;
+#error cpstm8 uart.c:169(0) incomplete declaration
+#error cpstm8 uart.c:166(43+13) UART_CR2_RIEN undefined
+#error cpstm8 uart.c:166(28+12) UART_CR2_REN undefined
+#error cpstm8 uart.c:166(13+12) UART_CR2_TEN undefined
+#error cpstm8 uart.c:126(16+2) rb undefined
+#error cpstm8 uart.c:56(17+15) UART_rx_start_i undefined
+#error cpstm8 uart.c:44(14+3) str undefined
+#error cpstm8 uart.c:37(12+4) byte undefined
