@@ -161,7 +161,6 @@ void SystickDelay(__IO uint32_t nTime);
 
 
 /* Private variables ---------------------------------------------------------*/
-GPIO_InitTypeDef        GPIO_InitStructure;
 static long buzz_counter = 0;
 static long pitches[255];
 static long durations[255];
@@ -169,13 +168,11 @@ static int start_note = 0; // Or current note
 static int end_note = 0;
 static char digits[3];
 static __IO uint32_t TimingDelay;
-TSL_tMeas_T measurment;
 static int display_data=0;
-USART_InitTypeDef USART_InitStructure;
-USART_ClockInitTypeDef USART_ClockInitStruct;
 int rx_state= 0;
 typedef enum states {state_show_time,state_set_time,state_show_hours,state_enter_service,state_clear_hours,state_address,
 	state_pre_time,state_cool_time,state_ext_mode}states;
+typedef enum rxstates {rx_state_none, rx_state_pre_time, rx_state_main_time, rx_state_cool_time, rx_state_get_checksum}rxstates;
 static states state = 0;
 typedef enum modes {mode_null,mode_clear_hours,mode_set_address,mode_set_pre_time,mode_set_cool_time}modes;
 static modes service_mode;
@@ -1076,7 +1073,7 @@ void write_eeprom(void){
 //-----------------------------------------------------------------------------------------------------
 void usart_receive(void){
 	useUart = 1;
-	enum rxstates {rx_state_none, rx_state_pre_time, rx_state_main_time, rx_state_cool_time, rx_state_get_checksum};
+
 	//	USART_ITConfig(USART1,USART_IT_RXNE,DISABLE);
 	data =  USART_ReceiveData(USART1);
 
