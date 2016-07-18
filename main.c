@@ -28,7 +28,11 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm8s.h"
-#include "ports_definition.h" 
+#include "ports_definition.h"
+#include "pitches.h"
+#include "stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s.h"
+#include "stm8s_tim2.h"
+#include "stm8s_tim4.h"
 
 /**
   * @addtogroup TIM1_ComplementarySignals_DeadTime_Break_Lock
@@ -41,10 +45,6 @@
 #define CCR1_Val  ((uint16_t)32767)
 #define CCR2_Val  ((uint16_t)16383)
 #define CCR3_Val  ((uint16_t)8191)
-#define LED_GPIO_PORT  (GPIOB)
-#define LED_GPIO_PINS  (GPIO_PIN_5)
-#define RELAY_GPIO_PORT  (GPIOA)
-#define RELAY_GPIO_PINS  (GPIO_PIN_5)
 
 
 /* Private macro -------------------------------------------------------------*/
@@ -52,11 +52,23 @@
 /* Private function prototypes -----------------------------------------------*/
 void Delay(uint16_t nCount);
 static void TIM1_Config(void);
+static void TIM4_Config(void);
 /* Private functions ---------------------------------------------------------*/
 /* Public functions ----------------------------------------------------------*/
 /* Global val\riables --------------------------------------------------------*/
 unsigned long Global_time = 0L; // global time in ms
 
+
+
+/**
+* Unlock data EEPROM
+*/
+void
+flash_init(void)
+{
+//        FLASH_DUCR = 0xAE;
+//        FLASH_DUCR = 0x56;
+}
 
 /**
   * @brief Delay
@@ -97,8 +109,26 @@ static void TIM1_Config(void)
 	TIM1_CR1 = TIM_CR1_APRE | TIM_CR1_URS | TIM_CR1_CEN;
 
   /* TIM1 counter enable */
-  TIM1_Cmd(ENABLE);
+    TIM1_Cmd(ENABLE);
 
+}
+
+
+/**
+  * @brief  Configure TIM4 to generate a software COM event each 180 ms
+  * @param  None
+  * @retval None
+  */
+static void TIM4_Config(void)
+{
+  /* TIM4 Peripheral Configuration */
+  /* Time Base configuration */
+  TIM4_TimeBaseInit(TIM4_PRESCALER_128, 0xFF);
+
+  /*TIM4 counter enable */
+  TIM4_Cmd(ENABLE);
+
+  TIM4_ITConfig(TIM4_IT_UPDATE, ENABLE);
 }
 
 #ifdef USE_FULL_ASSERT
@@ -243,7 +273,8 @@ void update_outputs(void);
 /* Global variables ----------------------------------------------------------*/
 
 __IO uint32_t Gv_SystickCounter;
-static const uint32_t eeprom_array[512] __attribute__ ((section (".eeprom1text")));
+#pragma location=0x1000 //Наш адрес в EEPROM/flash (в данном случае - начало еепромки)
+__no_init  uint32_t eeprom_array[512];
 
 /* Private functions ---------------------------------------------------------*/
 void Delay(__IO uint32_t nTime)
@@ -264,9 +295,9 @@ int get_controller_status(int n){
 	static int sts, data;
 	// clear in fifo
 	// send conmmand
-	while(USART_GetFlagStatus(USART1,USART_FLAG_RXNE))	data =  USART_ReceiveData(USART1); // Flush input
-    while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET); // wAIT UNTIL TX BUFFER IS EMPTY
-	USART_SendData(USART1,0x80 | ((n & 0x0f)<<3) | 0);
+	UART1_ClearFlag(UART1_FLAG_RXNE); // Flush input
+//    while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET); // wAIT UNTIL TX BUFFER IS EMPTY
+	UART1_SendData8(0x80 | ((n & 0x0f)<<3) | 0);
 //    while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET); // wAIT UNTIL TX BUFFER IS EMPTY
 //    delta = (delta + 1)& 0xff;
 //	USART_SendData(USART1,delta);
@@ -275,9 +306,9 @@ int get_controller_status(int n){
     SystickDelay(70);
 
     //read Rx buffer
-    sts = USART_GetFlagStatus(USART1,USART_FLAG_RXNE);
+    sts = UART1_GetFlagStatus(UART1_FLAG_RXNE);
     if(sts) {
-    	data =  USART_ReceiveData(USART1);
+    	data =  UART1_ReceiveData8();
     	//			while(1);
     	return (data);
 	}
@@ -296,20 +327,30 @@ void get_address(void){
 
 
 /**
+  * @brief  Configure system clock to run at 16Mhz
+  * @param  None
+  * @retval None
+  */
+static void CLK_Config(void)
+{
+    /* Initialization of the clock */
+    /* Clock divider to HSI/1 */
+    CLK_HSIPrescalerConfig(CLK_PRESCALER_HSIDIV1);
+}
+
+/**
   * @brief  Main program.
   * @param  None
   * @retval None
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
-       this is done through SystemInit() function which is called from startup
-       file (startup_stm32f0xx.s) before to branch to application main.
-       To reconfigure the default setting of SystemInit() function, refer to
-       system_stm32f0xx.c file
-     */
-		   /* Initialize I/Os in Output Mode */
+  CLK_Config();
+   /* Initialize I/Os in Output Mode */
   GPIO_Init(LED_GPIO_PORT, (GPIO_Pin_TypeDef)LED_GPIO_PINS, GPIO_MODE_OUT_PP_LOW_FAST);
+  GPIO_Init(BUZZER_GPIO_PORT, (GPIO_Pin_TypeDef)BUZZER_GPIO_PINS, GPIO_MODE_OUT_PP_LOW_FAST);
+  GPIO_Init(RELAY_GPIO_PORT, (GPIO_Pin_TypeDef)RELAY_GPIO_PINS, GPIO_MODE_OUT_PP_LOW_FAST);
+
 
 //  while (1)
 //  {
@@ -320,8 +361,9 @@ int main(void)
 
 	spi_init();
 	uart_init();
-  /* TIM1 configuration -----------------------------------------*/
-  TIM1_Config(); 
+
+    TIM1_Config();
+    TIM4_Config();
 
 	
 /*
@@ -356,17 +398,13 @@ int main(void)
 		  controller_address = 14;
 		  write_eeprom();
 	  }
-	  if (SysTick_Config(SystemCoreClock / (1000))){
-		  		while(1); // Capture error
-	  }
+
 //	  if(controller_address == 15){
 //		  display_data = 0xEAF;
 //		  // Try to get controller address continuously
 //		  get_address();
 //		  if(controller_address != 15)write_eeprom();
 //	  }
-
-	  NVIC_SetPriority (SysTick_IRQn, 3);
 
 	  while (1)
 	  {
@@ -379,13 +417,13 @@ int main(void)
 		  }
 		  else*/
 		  {
-			  key_states[0] = (key_states[0] << 1) | 	(!!(GPIOB->IDR & GPIO_IDR_13)); // Start
-			  key_states[1] = (key_states[1] << 1) | 	(!!(GPIOA->IDR & GPIO_IDR_11)); // -
-			  key_states[2] = (key_states[2] << 1) | 	(!!(GPIOB->IDR & GPIO_IDR_14)); // +
-			  key_states[3] = (key_states[3] << 1) | 	(!!(GPIOB->IDR & GPIO_IDR_7)); // External start
-			  if(controller_address == 15){
-				  key_states[4] = (key_states[4] << 1) | 	(!!(GPIOA->IDR & GPIO_IDR_1)); // Coin switch
-			  }
+			  key_states[0] = (key_states[0] << 1) | 	(!!(GPIO_ReadInputPin(KEY1_GPIO_PORT, KEY1_GPIO_PIN))); // Start
+			  key_states[1] = (key_states[1] << 1) | 	(!!(GPIO_ReadInputPin(KEY2_GPIO_PORT, KEY2_GPIO_PIN))); // -
+			  key_states[2] = (key_states[2] << 1) | 	(!!(GPIO_ReadInputPin(KEY3_GPIO_PORT, KEY3_GPIO_PIN))); // +
+//			  key_states[3] = (key_states[3] << 1) | 	(!!(GPIO_ReadInputPin(KEY4_GPIO_PORT, KEY4_GPIO_PIN))); // External start
+//			  if(controller_address == 15){
+//				  key_states[4] = (key_states[4] << 1) | 	(!!(GPIOA->IDR & GPIO_IDR_1)); // Coin switch
+//			  }
 			  ProcessSensors(); // Execute sensors related tasks
 			  // Scan buttons
 
@@ -492,19 +530,20 @@ int main(void)
 }
 
 void push_note(int pitch, int duration){
+
 	end_note = (end_note + 1)&0x3F;
 	pitches[end_note] = pitch;
 	durations[end_note] = duration;
-	TIM6->DIER |= TIM_DIER_UIE; // Enable interrupt on update event
+	TIM4->IER |= TIM4_IER_UIE; // Enable interrupt on update event
 }
 
 void get_next_note(){
 
 	if(start_note == end_note){
-		TIM6->DIER &= ~TIM_DIER_UIE; // Disable interrupt on update event
+		TIM4->IER &= ~TIM4_IER_UIE; // Disable interrupt on update event
 	} else {
 		start_note = (start_note + 1)&0x3F;
-		TIM6->ARR = pitches[start_note];
+		TIM4->ARR = pitches[start_note];
 		buzz_counter = durations[start_note]*20000/ pitches[start_note];
 	}
 }
@@ -514,16 +553,11 @@ void clear_notes(){
 	buzz_counter = 0;
 }
 
-void TIM6_DAC_IRQHandler() {
-	if((TIM6->SR & TIM_SR_UIF) != 0) // If update flag is set
-		if(buzz_counter){
-			buzz_counter--;
-			if(buzz_counter & 1)
-				GPIOB->BSRR = GPIO_BSRR_BS_9; // Set B9 high
-			else
-				GPIOB->BRR = GPIO_BSRR_BS_9; // Set B9 low
-		}
-	TIM6->SR &= ~TIM_SR_UIF; // Interrupt has been handled }
+void TIM4_MyIRQHandler() {
+	if(buzz_counter){
+		buzz_counter--;
+		GPIO_WriteReverse(BUZZER_GPIO_PORT, (GPIO_Pin_TypeDef)BUZZER_GPIO_PINS);
+	}
 	if(!buzz_counter )	get_next_note();
 }
 
@@ -715,6 +749,7 @@ void TimingDelay_Decrement(void)
 		digit_num++;
 		flash_counter++;
 		if(digit_num>2) digit_num = 0;
+		// TODO: Use SPI to update display
 		GPIOA->BSRR = GPIO_BSRR_BR_0  | GPIO_BSRR_BR_2; // Turn off the lights while changing them
 		GPIOC->BSRR = GPIO_BSRR_BR_3;
 		show_digit(((display_data & 0xFFF)& (0x0F<<(digit_num*4)))>>(digit_num*4));

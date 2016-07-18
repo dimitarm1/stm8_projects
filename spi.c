@@ -23,7 +23,7 @@
 #include "spi.h"
 
 // global variables for sending big buffer
-static U16 sendbuflen = 0;
+static uint16_t sendbuflen = 0;
 static U8 *sendbuf = NULL, *inbuff = NULL;
 
 /*
@@ -39,6 +39,18 @@ static U8 *sendbuf = NULL, *inbuff = NULL;
  */
 
 void spi_init(){
+	 /* Enable SPI clock */
+	CLK_PeripheralClockConfig(CLK_PERIPHERAL_SPI, ENABLE);
+
+	  /* Configure SPI pins: SCK and MOSI */
+	GPIO_Init(SPI_PORT,(GPIO_Pin_TypeDef)(SPI_SCK_PIN | SPI_MOSI_PIN), GPIO_MODE_OUT_PP_LOW_FAST);
+
+	  /* Initialize SPI */
+    SPI_Init(SPI_FIRSTBIT_MSB, SPI_BAUDRATEPRESCALER_64, SPI_MODE_MASTER,
+	           SPI_CLOCKPOLARITY_HIGH, SPI_CLOCKPHASE_2EDGE, SPI_DATADIRECTION_1LINE_TX,
+	           SPI_NSS_SOFT, 0x07);
+    SPI_Cmd(ENABLE);
+
 	// pins config: MISO is pullup in, MOSI & SCK are pp out
 	PORT(SPI_PORT, DDR) |= SPI_MOSI_PIN | SPI_SCK_PIN;
 	PORT(SPI_PORT, CR1) |= SPI_MOSI_PIN | SPI_SCK_PIN | SPI_MISO_PIN;
@@ -60,7 +72,7 @@ static void spi_wait(){
  * WARNING! Buffer should have livetime at least while !spi_buf_sent()
  * set _get == 1 to put received data into the same buffer
  */
-void spi_send_buffer(U8 *buff, U16 len, U8 *inb){
+void spi_send_buffer(U8 *buff, uint16_t len, U8 *inb){
 	inbuff = inb;
 	sendbuflen = len;
 	sendbuf = buff;

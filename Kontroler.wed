@@ -730,7 +730,7 @@ MRUDockID=0
 MRUDockLeftPos=1
 MRUDockTopPos=-2
 MRUDockRightPos=312
-MRUDockBottomPos=726
+MRUDockBottomPos=620
 MRUFloatStyle=4
 MRUFloatXPos=-1
 MRUFloatYPos=0
@@ -747,7 +747,7 @@ MRUFloatCY=180
 MRUHorzDockCX=300
 MRUHorzDockCY=180
 MRUVertDockCX=311
-MRUVertDockCY=728
+MRUVertDockCY=622
 MRUDockingState=0
 DockingStyle=61440
 TypeID=0
@@ -764,7 +764,7 @@ MRUDockID=0
 MRUDockLeftPos=1
 MRUDockTopPos=5
 MRUDockRightPos=1920
-MRUDockBottomPos=181
+MRUDockBottomPos=287
 MRUFloatStyle=4
 MRUFloatXPos=-1
 MRUFloatYPos=0
@@ -779,7 +779,7 @@ PctWidth=1000000
 MRUFloatCX=300
 MRUFloatCY=180
 MRUHorzDockCX=1919
-MRUHorzDockCY=176
+MRUHorzDockCY=282
 MRUVertDockCX=300
 MRUVertDockCY=180
 MRUDockingState=0
@@ -849,7 +849,7 @@ PctWidth=500000
 MRUFloatCX=300
 MRUFloatCY=180
 MRUHorzDockCX=300
-MRUHorzDockCY=176
+MRUHorzDockCY=282
 MRUVertDockCX=300
 MRUVertDockCY=180
 MRUDockingState=0
@@ -1059,7 +1059,7 @@ PctWidth=666665
 MRUFloatCX=300
 MRUFloatCY=180
 MRUHorzDockCX=300
-MRUHorzDockCY=176
+MRUHorzDockCY=282
 MRUVertDockCX=300
 MRUVertDockCY=180
 MRUDockingState=0
@@ -1094,7 +1094,7 @@ PctWidth=750000
 MRUFloatCX=300
 MRUFloatCY=180
 MRUHorzDockCX=300
-MRUHorzDockCY=176
+MRUHorzDockCY=282
 MRUVertDockCX=300
 MRUVertDockCY=180
 MRUDockingState=0
@@ -1129,7 +1129,7 @@ PctWidth=800000
 MRUFloatCX=300
 MRUFloatCY=180
 MRUHorzDockCX=300
-MRUHorzDockCY=176
+MRUHorzDockCY=282
 MRUVertDockCX=300
 MRUVertDockCY=180
 MRUDockingState=0
@@ -1242,7 +1242,7 @@ ptn_Child1=MainFrame
 ptn_Child2=ChildFrames
 
 [WorkState_v1_2.Frames.MainFrame]
-WindowPlacement=MCAAAAAACAAAAAAADAAAAAAAAADIPPPPAADIPPPPPPPPPPPPPPPPPPPPHLAAAAAAEHAAAAAAEGEAAAAADBDAAAAA
+WindowPlacement=MCAAAAAACAAAAAAADAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPHLAAAAAAEHAAAAAAEGEAAAAADBDAAAAA
 Title=ST Visual Develop - Kontroler.stw - [main.c]
 
 [WorkState_v1_2.Frames.ChildFrames]
@@ -1255,6 +1255,9 @@ ptn_Child6=Document-5
 ptn_Child7=Document-6
 ptn_Child8=Document-7
 ptn_Child9=Document-8
+ptn_Child10=Document-9
+ptn_Child11=Document-10
+ptn_Child12=Document-11
 
 [WorkState_v1_2.Frames.ChildFrames.Document-0]
 ptn_Child1=ViewFrame-0
@@ -1352,5 +1355,38 @@ DocPathName=ports_definition.h
 DocumentString=
 DocTemplateIndex=0
 WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPIPPPPPPPCOPPPPPPAAAAAAAAAAAAAAAAHEFAAAAAHMBAAAAA
+IsActiveChildFrame=False
+IsFrameVisible=True
+
+[WorkState_v1_2.Frames.ChildFrames.Document-9]
+ptn_Child1=ViewFrame-0
+
+[WorkState_v1_2.Frames.ChildFrames.Document-9.ViewFrame-0]
+DocPathName=c:\program files (x86)\cosmic\cxstm8_eval\hstm8\mods0.h
+DocumentString=
+DocTemplateIndex=0
+WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPIPPPPPPPCOPPPPPPBOAAAAAABOAAAAAAICGAAAAAIKCAAAAA
+IsActiveChildFrame=False
+IsFrameVisible=True
+
+[WorkState_v1_2.Frames.ChildFrames.Document-10]
+ptn_Child1=ViewFrame-0
+
+[WorkState_v1_2.Frames.ChildFrames.Document-10.ViewFrame-0]
+DocPathName=stm8s_conf.h
+DocumentString=
+DocTemplateIndex=0
+WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPIPPPPPPPCOPPPPPPAAAAAAAAAAAAAAAAHEFAAAAAHMBAAAAA
+IsActiveChildFrame=False
+IsFrameVisible=True
+
+[WorkState_v1_2.Frames.ChildFrames.Document-11]
+ptn_Child1=ViewFrame-0
+
+[WorkState_v1_2.Frames.ChildFrames.Document-11.ViewFrame-0]
+DocPathName=stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\src\stm8s_uart1.c
+DocumentString=
+DocTemplateIndex=0
+WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPIPPPPPPPCOPPPPPPLEAAAAAALEAAAAAAEMFAAAAAKNBAAAAA
 IsActiveChildFrame=False
 IsFrameVisible=True

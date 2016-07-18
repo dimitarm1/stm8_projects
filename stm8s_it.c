@@ -32,6 +32,9 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+extern uint8_t TxBuffer1[];
+extern uint8_t RxBuffer1[];
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -222,6 +225,8 @@ INTERRUPT_HANDLER(TIM1_UPD_OVF_TRG_BRK_IRQHandler, 11)
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
+	 TIM1_ClearITPendingBit(TIM1_IT_UPDATE);
+	 TimingDelay_Decrement();
 }
 
 /**
@@ -454,11 +459,15 @@ INTERRUPT_HANDLER(TIM6_UPD_OVF_TRG_IRQHandler, 23)
   * @param  None
   * @retval None
   */
+void TIM4_MyIRQHandler(); // Defined in main.c
  INTERRUPT_HANDLER(TIM4_UPD_OVF_IRQHandler, 23)
 {
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
+	 /* Cleat Interrupt Pending bit */
+	 TIM4_ClearITPendingBit(TIM4_IT_UPDATE);
+	 TIM4_MyIRQHandler();
 }
 #endif /*STM8S903*/
 

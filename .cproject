@@ -45,9 +45,6 @@
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
 		</cconfiguration>
 	</storageModule>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="STM8_Kontroler.null.1255519978" name="STM8_Kontroler"/>
 	</storageModule>
@@ -76,5 +73,14 @@
 				<runAllBuilders>true</runAllBuilders>
 			</target>
 		</buildTargets>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.cross.base.2006479314;cdt.managedbuild.toolchain.gnu.cross.base.2006479314.1118978622;cdt.managedbuild.tool.gnu.cross.c.compiler.181918876;cdt.managedbuild.tool.gnu.c.compiler.input.1372800416">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.cross.base.2006479314;cdt.managedbuild.toolchain.gnu.cross.base.2006479314.1118978622;cdt.managedbuild.tool.gnu.cross.cpp.compiler.514608472;cdt.managedbuild.tool.gnu.cpp.compiler.input.1271063489">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP"/>
+		</scannerConfigBuildInfo>
 	</storageModule>
 </cproject>
