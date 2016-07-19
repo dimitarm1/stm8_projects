@@ -119,15 +119,11 @@ Debug\main.$(ObjectExt) : main.c c:\PROGRA~2\cosmic\CXSTM8~1\hstm8\mods0.h stm8s
 	@if not exist $(dir $@)  mkdir $(dir $@)
 	$(CFLAGS_PRJ)
 
-Debug\spi.$(ObjectExt) : spi.c c:\PROGRA~2\cosmic\CXSTM8~1\hstm8\mods0.h ports_definition.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s.h stm8s_conf.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_adc1.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_awu.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_beep.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_clk.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_exti.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_flash.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_gpio.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_i2c.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_itc.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_iwdg.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_rst.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_spi.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_tim1.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_tim2.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_tim4.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_uart1.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_wwdg.h spi.h 
-	@if not exist $(dir $@)  mkdir $(dir $@)
-	$(CFLAGS_PRJ)
-
 Debug\uart.$(ObjectExt) : uart.c c:\PROGRA~2\cosmic\CXSTM8~1\hstm8\mods0.h ports_definition.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s.h stm8s_conf.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_adc1.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_awu.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_beep.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_clk.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_exti.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_flash.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_gpio.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_i2c.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_itc.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_iwdg.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_rst.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_spi.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_tim1.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_tim2.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_tim4.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_uart1.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_wwdg.h uart.h stm8s_it.h 
 	@if not exist $(dir $@)  mkdir $(dir $@)
 	$(CFLAGS_PRJ)
 
-$(ProjectSFile).elf :  $(OutputPath)\stm8s_adc1.o $(OutputPath)\stm8s_awu.o $(OutputPath)\stm8s_beep.o $(OutputPath)\stm8s_clk.o $(OutputPath)\stm8s_exti.o $(OutputPath)\stm8s_flash.o $(OutputPath)\stm8s_gpio.o $(OutputPath)\stm8s_i2c.o $(OutputPath)\stm8s_itc.o $(OutputPath)\stm8s_iwdg.o $(OutputPath)\stm8s_rst.o $(OutputPath)\stm8s_spi.o $(OutputPath)\stm8s_tim1.o $(OutputPath)\stm8s_tim2.o $(OutputPath)\stm8s_tim4.o $(OutputPath)\stm8s_uart1.o $(OutputPath)\stm8s_wwdg.o $(OutputPath)\stm8s_it.o $(OutputPath)\main.o $(OutputPath)\spi.o $(OutputPath)\uart.o $(OutputPath)\kontroler.lkf
+$(ProjectSFile).elf :  $(OutputPath)\stm8s_adc1.o $(OutputPath)\stm8s_awu.o $(OutputPath)\stm8s_beep.o $(OutputPath)\stm8s_clk.o $(OutputPath)\stm8s_exti.o $(OutputPath)\stm8s_flash.o $(OutputPath)\stm8s_gpio.o $(OutputPath)\stm8s_i2c.o $(OutputPath)\stm8s_itc.o $(OutputPath)\stm8s_iwdg.o $(OutputPath)\stm8s_rst.o $(OutputPath)\stm8s_spi.o $(OutputPath)\stm8s_tim1.o $(OutputPath)\stm8s_tim2.o $(OutputPath)\stm8s_tim4.o $(OutputPath)\stm8s_uart1.o $(OutputPath)\stm8s_wwdg.o $(OutputPath)\stm8s_it.o $(OutputPath)\main.o $(OutputPath)\uart.o $(OutputPath)\kontroler.lkf
 	$(ToolsetBin)\clnk  $(ToolsetLibOpts) -o $(OutputPath)\$(TargetSName).sm8 -m$(OutputPath)\$(TargetSName).map $(OutputPath)\$(TargetSName).lkf 
 	$(ToolsetBin)\cvdwarf  $(OutputPath)\$(TargetSName).sm8
 
@@ -152,7 +148,6 @@ clean :
 	-@erase $(OutputPath)\stm8s_wwdg.o
 	-@erase $(OutputPath)\stm8s_it.o
 	-@erase $(OutputPath)\main.o
-	-@erase $(OutputPath)\spi.o
 	-@erase $(OutputPath)\uart.o
 	-@erase $(OutputPath)\kontroler.elf
 	-@erase $(OutputPath)\kontroler.elf
@@ -176,7 +171,6 @@ clean :
 	-@erase $(OutputPath)\stm8s_wwdg.ls
 	-@erase $(OutputPath)\stm8s_it.ls
 	-@erase $(OutputPath)\main.ls
-	-@erase $(OutputPath)\spi.ls
 	-@erase $(OutputPath)\uart.ls
 
 endif
@@ -276,15 +270,11 @@ Release\main.$(ObjectExt) : main.c c:\PROGRA~2\cosmic\CXSTM8~1\hstm8\mods0.h stm
 	@if not exist $(dir $@)  mkdir $(dir $@)
 	$(CFLAGS_PRJ)
 
-Release\spi.$(ObjectExt) : spi.c c:\PROGRA~2\cosmic\CXSTM8~1\hstm8\mods0.h ports_definition.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s.h stm8s_conf.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_awu.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_beep.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_clk.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_exti.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_flash.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_gpio.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_i2c.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_itc.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_iwdg.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_rst.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_spi.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_tim1.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_tim2.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_tim4.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_wwdg.h spi.h 
-	@if not exist $(dir $@)  mkdir $(dir $@)
-	$(CFLAGS_PRJ)
-
 Release\uart.$(ObjectExt) : uart.c c:\PROGRA~2\cosmic\CXSTM8~1\hstm8\mods0.h ports_definition.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s.h stm8s_conf.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_awu.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_beep.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_clk.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_exti.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_flash.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_gpio.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_i2c.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_itc.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_iwdg.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_rst.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_spi.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_tim1.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_tim2.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_tim4.h stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s_wwdg.h uart.h stm8s_it.h 
 	@if not exist $(dir $@)  mkdir $(dir $@)
 	$(CFLAGS_PRJ)
 
-kontroler.elf :  $(OutputPath)\stm8s_adc1.o $(OutputPath)\stm8s_awu.o $(OutputPath)\stm8s_beep.o $(OutputPath)\stm8s_clk.o $(OutputPath)\stm8s_exti.o $(OutputPath)\stm8s_flash.o $(OutputPath)\stm8s_gpio.o $(OutputPath)\stm8s_i2c.o $(OutputPath)\stm8s_itc.o $(OutputPath)\stm8s_iwdg.o $(OutputPath)\stm8s_rst.o $(OutputPath)\stm8s_spi.o $(OutputPath)\stm8s_tim1.o $(OutputPath)\stm8s_tim2.o $(OutputPath)\stm8s_tim4.o $(OutputPath)\stm8s_uart1.o $(OutputPath)\stm8s_wwdg.o $(OutputPath)\stm8s_it.o $(OutputPath)\main.o $(OutputPath)\spi.o $(OutputPath)\uart.o $(OutputPath)\kontroler.lkf
+kontroler.elf :  $(OutputPath)\stm8s_adc1.o $(OutputPath)\stm8s_awu.o $(OutputPath)\stm8s_beep.o $(OutputPath)\stm8s_clk.o $(OutputPath)\stm8s_exti.o $(OutputPath)\stm8s_flash.o $(OutputPath)\stm8s_gpio.o $(OutputPath)\stm8s_i2c.o $(OutputPath)\stm8s_itc.o $(OutputPath)\stm8s_iwdg.o $(OutputPath)\stm8s_rst.o $(OutputPath)\stm8s_spi.o $(OutputPath)\stm8s_tim1.o $(OutputPath)\stm8s_tim2.o $(OutputPath)\stm8s_tim4.o $(OutputPath)\stm8s_uart1.o $(OutputPath)\stm8s_wwdg.o $(OutputPath)\stm8s_it.o $(OutputPath)\main.o $(OutputPath)\uart.o $(OutputPath)\kontroler.lkf
 	$(ToolsetBin)\clnk  $(ToolsetLibOpts) -o $(OutputPath)\$(TargetSName).sm8 $(OutputPath)\$(TargetSName).lkf 
 	$(ToolsetBin)\cvdwarf  $(OutputPath)\$(TargetSName).sm8 
 
@@ -309,7 +299,6 @@ clean :
 	-@erase $(OutputPath)\stm8s_wwdg.o
 	-@erase $(OutputPath)\stm8s_it.o
 	-@erase $(OutputPath)\main.o
-	-@erase $(OutputPath)\spi.o
 	-@erase $(OutputPath)\uart.o
 	-@erase $(OutputPath)\kontroler.elf
 	-@erase $(OutputPath)\kontroler.map
@@ -333,8 +322,7 @@ clean :
 	-@erase $(OutputPath)\stm8s_uart1.ls
 	-@erase $(OutputPath)\stm8s_wwdg.ls
 	-@erase $(OutputPath)\stm8s_it.ls
-	-@erase $(OutputPath)\main.ls
-	-@erase $(OutputPath)\spi.ls
+	-@erase $(OutputPath)\main.ls	
 	-@erase $(OutputPath)\uart.ls
 	
 endif

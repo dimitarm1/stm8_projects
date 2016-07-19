@@ -34,6 +34,8 @@
 /* Private variables ---------------------------------------------------------*/
 extern uint8_t TxBuffer1[];
 extern uint8_t RxBuffer1[];
+void TimingDelay_Decrement(void);
+void TIM4_MyIRQHandler();
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -459,7 +461,7 @@ INTERRUPT_HANDLER(TIM6_UPD_OVF_TRG_IRQHandler, 23)
   * @param  None
   * @retval None
   */
-void TIM4_MyIRQHandler(); // Defined in main.c
+
  INTERRUPT_HANDLER(TIM4_UPD_OVF_IRQHandler, 23)
 {
   /* In order to detect unexpected events during development,
@@ -467,7 +469,7 @@ void TIM4_MyIRQHandler(); // Defined in main.c
   */
 	 /* Cleat Interrupt Pending bit */
 	 TIM4_ClearITPendingBit(TIM4_IT_UPDATE);
-	 TIM4_MyIRQHandler();
+	 //TIM4_MyIRQHandler();
 }
 #endif /*STM8S903*/
 

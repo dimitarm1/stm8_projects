@@ -33,6 +33,7 @@
 #include "stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc\stm8s.h"
 #include "stm8s_tim2.h"
 #include "stm8s_tim4.h"
+#include "uart.h"
 
 /**
   * @addtogroup TIM1_ComplementarySignals_DeadTime_Break_Lock
@@ -70,19 +71,7 @@ flash_init(void)
 //        FLASH_DUCR = 0x56;
 }
 
-/**
-  * @brief Delay
-  * @param nCount
-  * @retval None
-  */
-void Delay(uint16_t nCount)
-{
-  /* Decrement nCount value */
-  while (nCount != 0)
-  {
-    nCount--;
-  }
-}
+
 /**
   * @brief  Configure TIM1 to generate 3 complementary signals, to insert a 
   *         defined dead time value, to use the break feature and to lock the 
@@ -273,16 +262,17 @@ void update_outputs(void);
 /* Global variables ----------------------------------------------------------*/
 
 __IO uint32_t Gv_SystickCounter;
-#pragma location=0x1000 //Наш адрес в EEPROM/flash (в данном случае - начало еепромки)
-__no_init  uint32_t eeprom_array[512];
+//#pragma location=0x1000 //Наш адрес в EEPROM/flash (в данном случае - начало еепромки)
+//__no_init  
+uint32_t eeprom_array[512];
 
 /* Private functions ---------------------------------------------------------*/
-void Delay(__IO uint32_t nTime)
-{
-  TimingDelay = nTime;
+//void Delay(__IO uint32_t nTime)
+//{
+//  TimingDelay = nTime;
 
-  while(TimingDelay != 0);
-}
+//  while(TimingDelay != 0);
+//}
 
 void show_digit(int digit){
 	digit = digit & 0x0F;
@@ -351,6 +341,17 @@ int main(void)
   GPIO_Init(BUZZER_GPIO_PORT, (GPIO_Pin_TypeDef)BUZZER_GPIO_PINS, GPIO_MODE_OUT_PP_LOW_FAST);
   GPIO_Init(RELAY_GPIO_PORT, (GPIO_Pin_TypeDef)RELAY_GPIO_PINS, GPIO_MODE_OUT_PP_LOW_FAST);
 
+  GPIO_Init(KEY1_GPIO_PORT, (GPIO_Pin_TypeDef)KEY1_GPIO_PIN, GPIO_MODE_IN_PU_NO_IT);
+  GPIO_Init(KEY2_GPIO_PORT, (GPIO_Pin_TypeDef)KEY2_GPIO_PIN, GPIO_MODE_IN_PU_NO_IT);
+  GPIO_Init(KEY3_GPIO_PORT, (GPIO_Pin_TypeDef)KEY3_GPIO_PIN, GPIO_MODE_IN_PU_NO_IT);
+
+  GPIO_Init(LED7_1_GPIO_PORT, (GPIO_Pin_TypeDef)LED7_1_GPIO_PINS, GPIO_MODE_OUT_PP_LOW_FAST);
+  GPIO_Init(LED7_2_GPIO_PORT, (GPIO_Pin_TypeDef)LED7_2_GPIO_PINS, GPIO_MODE_OUT_PP_LOW_FAST);
+  GPIO_Init(LED7_3_GPIO_PORT, (GPIO_Pin_TypeDef)LED7_3_GPIO_PINS, GPIO_MODE_OUT_PP_LOW_FAST);
+  GPIO_Init(LED7_4_GPIO_PORT, (GPIO_Pin_TypeDef)LED7_4_GPIO_PINS, GPIO_MODE_OUT_PP_LOW_FAST);
+  GPIO_Init(LED7_5_GPIO_PORT, (GPIO_Pin_TypeDef)LED7_5_GPIO_PINS, GPIO_MODE_OUT_PP_LOW_FAST);
+  GPIO_Init(LED7_6_GPIO_PORT, (GPIO_Pin_TypeDef)LED7_6_GPIO_PINS, GPIO_MODE_OUT_PP_LOW_FAST);
+
 
 //  while (1)
 //  {
@@ -359,7 +360,7 @@ int main(void)
 //    Delay(0xFFFF);
 //  }
 
-	spi_init();
+	//spi_init();
 	uart_init();
 
     TIM1_Config();
@@ -746,39 +747,31 @@ void TimingDelay_Decrement(void)
 
 	if(++led_counter>6){
 		led_counter = 0;
-		digit_num++;
-		flash_counter++;
-		if(digit_num>2) digit_num = 0;
-		// TODO: Use SPI to update display
-		GPIOA->BSRR = GPIO_BSRR_BR_0  | GPIO_BSRR_BR_2; // Turn off the lights while changing them
-		GPIOC->BSRR = GPIO_BSRR_BR_3;
-		show_digit(((display_data & 0xFFF)& (0x0F<<(digit_num*4)))>>(digit_num*4));
-		if(flash_mode < 3 ||(flash_counter & 0x40)){
-			switch (digit_num){
-			case 2:
-				GPIOA->BSRR = GPIO_BSRR_BS_2 ;
-				GPIOA->BSRR = GPIO_BSRR_BR_0 ;
-				GPIOC->BSRR = GPIO_BSRR_BR_3;
-				break;
 
-			case 1:
-				GPIOC->BSRR = GPIO_BSRR_BS_3 ;
-				GPIOA->BSRR = GPIO_BSRR_BR_0 | GPIO_BSRR_BR_2;
-				break;
-			case 0:
-			default:
-				GPIOA->BSRR = GPIO_BSRR_BS_0 ;
-				GPIOA->BSRR = GPIO_BSRR_BR_2;
-				GPIOC->BSRR = GPIO_BSRR_BR_3;
-				break;
-			}
-		}
+		flash_counter++;
+		digit_num = 0;
+		// TODO: Use SPI to update display
+		GPIO_WriteLow(LED7_1_GPIO_PORT, LED7_1_GPIO_PINS); // Turn off the lights while changing them
+		GPIO_WriteLow(LED7_2_GPIO_PORT, LED7_2_GPIO_PINS);
+		GPIO_WriteLow(LED7_3_GPIO_PORT, LED7_3_GPIO_PINS);
+		GPIO_WriteLow(LED7_4_GPIO_PORT, LED7_4_GPIO_PINS);
+		GPIO_WriteLow(LED7_5_GPIO_PORT, LED7_5_GPIO_PINS);
+		GPIO_WriteLow(LED7_6_GPIO_PORT, LED7_6_GPIO_PINS);
+
+
+		show_digit(((display_data & 0xFFF)& (0x0F<<(digit_num*4)))>>(digit_num*4));
+
 		if (((flash_mode == 1)&& digit_num == 0 && (flash_counter & 0x40)) || ((flash_mode == 2) && (digit_num == 2))){
-			GPIOC->BSRR = GPIO_BSRR_BS_0 | GPIO_BSRR_BS_1;
+
 		}
 		else
 		{
-			GPIOC->BSRR = GPIO_BSRR_BR_0 | GPIO_BSRR_BR_1;
+			GPIO_WriteHigh(LED7_1_GPIO_PORT, LED7_1_GPIO_PINS); // Turn on the lights after changing them
+			GPIO_WriteHigh(LED7_2_GPIO_PORT, LED7_2_GPIO_PINS);
+			GPIO_WriteHigh(LED7_3_GPIO_PORT, LED7_3_GPIO_PINS);
+			GPIO_WriteHigh(LED7_4_GPIO_PORT, LED7_4_GPIO_PINS);
+			GPIO_WriteHigh(LED7_5_GPIO_PORT, LED7_5_GPIO_PINS);
+			GPIO_WriteHigh(LED7_6_GPIO_PORT, LED7_6_GPIO_PINS);
 		}
 	}
 	if(start_delay)start_delay--;
@@ -949,25 +942,25 @@ void KeyPressed_3()
 
 void set_relay2(unsigned char state)
 {
-	if (state && start_delay == 0)
-	{
-		 GPIOC->BSRR = GPIO_BSRR_BS_11 ;
-	}
-	else
-	{
-		 GPIOC->BSRR = GPIO_BSRR_BR_11 ;
-	}
+//	if (state && start_delay == 0)
+//	{
+//		 GPIOC->BSRR = GPIO_BSRR_BS_11 ;
+//	}
+//	else
+//	{
+//		 GPIOC->BSRR = GPIO_BSRR_BR_11 ;
+//	}
 }
 
 void set_relay1(unsigned char state)
 {
 	if (state )
 	{
-		 GPIOA->BSRR = GPIO_BSRR_BS_15;
+		GPIO_WriteHigh(RELAY_GPIO_PORT, RELAY_GPIO_PINS);
 	}
 	else
 	{
-		 GPIOA->BSRR = GPIO_BSRR_BR_15;
+		GPIO_WriteLow(RELAY_GPIO_PORT, RELAY_GPIO_PINS);
 	}
 }
 
@@ -1086,7 +1079,7 @@ void write_eeprom(void){
 			push_note(D4,3);
 		}
 	} else {
-		volatile static FLASH_Status sts;
+		volatile static int sts;
 		p = (uint32_t *)&flash_mem;
 		flash_mem.settings.pre_time = preset_pre_time;
 		flash_mem.settings.cool_time = preset_cool_time;
@@ -1100,7 +1093,7 @@ void write_eeprom(void){
 		sts = FLASH_ProgramWord((uint32_t)&eeprom_array[index+1],p[1]);
 		index = sizeof(flash_mem);
 		index ++;
-		sts = sts;
+//		sts = sts;
 	}
 	FLASH_Lock();
 }
@@ -1110,7 +1103,7 @@ void usart_receive(void){
 	useUart = 1;
 
 	//	USART_ITConfig(USART1,USART_IT_RXNE,DISABLE);
-	data =  USART_ReceiveData(USART1);
+	data =  USART_ReceiveData(UART1);
 
 	//pre_time_sent = 0, main_time_sent = 0, cool_time_sent = 0;
 
@@ -1122,7 +1115,7 @@ void usart_receive(void){
 		if((data == (0x80U | ((controller_address & 0x0fU)<<3U)))){
 			data = (curr_status<<6)| ToBCD(curr_time);
 //			data = (STATUS_WORKING<<6)|4;
-			USART_SendData(USART1,data);
+			USART_SendData(UART1,data);
 		}
 		else if (data == ((0x80U | ((controller_address & 0x0fU)<<3U) ))+1) //Command 1 - Start
 		{
@@ -1171,7 +1164,7 @@ void usart_receive(void){
 			rx_state = rx_state_get_checksum;
 			int checksum = (pre_time_sent + cool_time_sent  - time_in_hex - 5) & 0x7F;
 			data = checksum;
-			USART_SendData(USART1,data);
+			USART_SendData(UART1,data);
 		}
 
 

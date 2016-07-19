@@ -19,8 +19,8 @@
  * MA 02110-1301, USA.
  */
 #pragma once
-#ifndef __MAIN_H__
-#define __MAIN_H__
+#ifndef __UART_H__
+#define __UART_H__
 
 extern volatile unsigned long Global_time; // global time in ms
 
@@ -42,4 +42,4 @@ void printUHEX(U8 val);
 
 #define check_UART_pointer(x)  do{if(x == UART_BUF_LEN) x = 0;}while(0)
 
-#endif // __MAIN_H__
+#endif // __UART_H__
