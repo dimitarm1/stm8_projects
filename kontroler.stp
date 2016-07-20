@@ -78,22 +78,22 @@ String.103.0=.\;stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc;stm8s_s
 
 [Root.Config.0.Settings.2]
 String.2.0=
-String.6.0=2016,6,4,17,10,46
+String.6.0=2016,7,20,23,44,40
 String.100.0=STM8S003F3P
 
 [Root.Config.0.Settings.3]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 +mods0 -customDebCompat -customOpt-no -customC-pp -customLst -l -dSTM8S003 -istm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
+String.3.0=cxstm8 +mods0 -customOpt +compact -ga -customC-pp -customLst-l -dSTM8S003 -istm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
-String.6.0=2016,6,4,17,23,52
+String.6.0=2016,7,20,23,48,17
 
 [Root.Config.0.Settings.4]
 String.2.0=Assembling $(InputFile)...
-String.3.0=castm8 -xx -l $(ToolsetIncOpts) -o$(IntermPath)$(InputName).$(ObjectExt) $(InputFile)
+String.3.0=castm8 -l $(ToolsetIncOpts) -o$(IntermPath)$(InputName).$(ObjectExt) $(InputFile)
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
-String.6.0=2016,6,4,17,10,46
+String.6.0=2016,7,20,23,48,17
 
 [Root.Config.0.Settings.5]
 String.2.0=Running Pre-Link step
@@ -102,11 +102,11 @@ String.8.0=
 
 [Root.Config.0.Settings.6]
 String.2.0=Running Linker
-String.3.0=clnk $(ToolsetLibOpts) -o $(OutputPath)$(TargetSName).sm8 -fakeInteger -fakeOutFile$(ProjectSFile).elf -fakeRunConv -fakeStartupcrtsi0.sm8 -fakeSemiAutoGen -fakeVectFilestm8_interrupt_vector.c -fakeVectAddr0x8000 -customMapFile -customMapFile-m$(OutputPath)$(TargetSName).map -customMapAddress -customCfgFile$(OutputPath)$(TargetSName).lkf 
+String.3.0=clnk $(ToolsetLibOpts) -o $(OutputPath)$(TargetSName).sm8 -fakeInteger -fakeOutFile$(ProjectSFile).elf -fakeRunConv -fakeStartupcrtsi0.sm8 -fakeSemiAutoGen -fakeVectAddr0x8000 -customMapFile -customMapFile-m$(OutputPath)$(TargetSName).map -customMapAddress -customCfgFile$(OutputPath)$(TargetSName).lkf 
 String.3.1=cvdwarf $(OutputPath)$(TargetSName).sm8
 String.4.0=$(OutputPath)$(TargetFName)
 String.5.0=$(OutputPath)$(ProjectSFile).elf $(OutputPath)$(TargetSName).map
-String.6.0=2016,6,4,17,17,32
+String.6.0=2016,7,20,23,48,17
 String.100.0=
 String.101.0=crtsi.st7
 String.102.0=+seg .const -b 0x8080 -m 0x1f80 -n .const -it
@@ -160,12 +160,12 @@ String.103.0=.\;stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc;stm8s_s
 
 [Root.Config.1.Settings.2]
 String.2.0=
-String.6.0=2016,6,4,17,10,46
+String.6.0=2016,7,20,23,44,40
 String.100.0=STM8S003F3P
 
 [Root.Config.1.Settings.3]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 -istm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc  +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile) 
+String.3.0=cxstm8 -istm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
 String.6.0=2016,6,4,17,10,46
@@ -183,21 +183,21 @@ String.6.0=2016,6,4,17,10,46
 
 [Root.Config.1.Settings.6]
 String.2.0=Running Linker
-String.3.0=clnk -fakeRunConv -fakeInteger -fakeSemiAutoGen $(ToolsetLibOpts) -o $(OutputPath)$(TargetSName).sm8 -fakeOutFile$(ProjectSFile).elf -customCfgFile $(OutputPath)$(TargetSName).lkf -fakeVectFilestm8_interrupt_vector.c -fakeStartupcrtsi0.sm8 
+String.3.0=clnk -fakeRunConv -fakeInteger -fakeSemiAutoGen $(ToolsetLibOpts) -o $(OutputPath)$(TargetSName).sm8 -fakeOutFile$(ProjectSFile).elf -customCfgFile $(OutputPath)$(TargetSName).lkf -fakeStartupcrtsi0.sm8 
 String.3.1=cvdwarf $(OutputPath)$(TargetSName).sm8 -fakeVectAddr0x8000
 String.4.0=$(OutputPath)$(TargetFName)
 String.5.0=$(OutputPath)$(TargetSName).map $(OutputPath)$(TargetSName).st7 $(OutputPath)$(TargetSName).s19
-String.6.0=2016,6,4,17,10,46
+String.6.0=2016,7,20,23,43,42
 String.101.0=crtsi.st7
-String.102.0=+seg .const -b 0x8080 -m 0x1f80  -n .const -it 
-String.102.1=+seg .text -a .const  -n .text 
-String.102.2=+seg .eeprom -b 0x4000 -m 0x80  -n .eeprom 
-String.102.3=+seg .bsct -b 0x0 -m 0x100  -n .bsct 
-String.102.4=+seg .ubsct -a .bsct  -n .ubsct 
-String.102.5=+seg .bit -a .ubsct  -n .bit -id 
-String.102.6=+seg .share -a .bit  -n .share -is 
-String.102.7=+seg .data -b 0x100 -m 0x100  -n .data 
-String.102.8=+seg .bss -a .data  -n .bss 
+String.102.0=+seg .const -b 0x8080 -m 0x1f80 -n .const -it 
+String.102.1=+seg .text -a .const -n .text 
+String.102.2=+seg .eeprom -b 0x4000 -m 0x80 -n .eeprom 
+String.102.3=+seg .bsct -b 0x0 -m 0x100 -n .bsct 
+String.102.4=+seg .ubsct -a .bsct -n .ubsct 
+String.102.5=+seg .bit -a .ubsct -n .bit -id 
+String.102.6=+seg .share -a .bit -n .share -is 
+String.102.7=+seg .data -b 0x100 -m 0x100 -n .data 
+String.102.8=+seg .bss -a .data -n .bss
 String.103.0=Code,Constants[0x8080-0x9fff]=.const,.text
 String.103.1=Eeprom[0x4000-0x407f]=.eeprom
 String.103.2=Zero Page[0x0-0xff]=.bsct,.ubsct,.bit,.share
@@ -243,17 +243,17 @@ Int.1=0
 
 [Root.STDLib.Config.0.Settings.1]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 +mods0 -customDebCompat -customOpt-no -customC-pp -customLst -l -dSTM8S003 -istm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
+String.3.0=cxstm8 +mods0 -customOpt +compact -ga -customC-pp -customLst-l -dSTM8S003 -istm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
-String.6.0=2016,6,4,17,23,52
+String.6.0=2016,7,20,23,48,17
 
 [Root.STDLib.Config.0.Settings.2]
 String.2.0=Assembling $(InputFile)...
-String.3.0=castm8 -xx -l $(ToolsetIncOpts) -o$(IntermPath)$(InputName).$(ObjectExt) $(InputFile)
+String.3.0=castm8 -l $(ToolsetIncOpts) -o$(IntermPath)$(InputName).$(ObjectExt) $(InputFile)
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
-String.6.0=2016,6,4,17,10,46
+String.6.0=2016,7,20,23,48,17
 
 [Root.STDLib.Config.0.Settings.3]
 String.2.0=Performing Custom Build on $(InputFile)
@@ -270,7 +270,7 @@ Int.1=0
 
 [Root.STDLib.Config.1.Settings.1]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 -istm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc  +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile) 
+String.3.0=cxstm8 -istm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
 String.6.0=2016,6,4,17,10,46
@@ -466,7 +466,7 @@ PathName=stm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\src\stm8s_wwdg.c
 [Root.Source Files]
 ElemType=Folder
 PathName=Source Files
-Child=Root.Source Files.interrupts.c
+Child=Root.Source Files.main.c
 Next=Root.Include Files
 Config.0=Root.Source Files.Config.0
 Config.1=Root.Source Files.Config.1
@@ -491,17 +491,17 @@ Int.1=0
 
 [Root.Source Files.Config.0.Settings.1]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 +mods0 -customDebCompat -customOpt-no -customC-pp -customLst -l -dSTM8S003 -istm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
+String.3.0=cxstm8 +mods0 -customOpt +compact -ga -customC-pp -customLst-l -dSTM8S003 -istm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
-String.6.0=2016,6,4,17,23,52
+String.6.0=2016,7,20,23,48,17
 
 [Root.Source Files.Config.0.Settings.2]
 String.2.0=Assembling $(InputFile)...
-String.3.0=castm8 -xx -l $(ToolsetIncOpts) -o$(IntermPath)$(InputName).$(ObjectExt) $(InputFile)
+String.3.0=castm8 -l $(ToolsetIncOpts) -o$(IntermPath)$(InputName).$(ObjectExt) $(InputFile)
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
-String.6.0=2016,6,4,17,10,46
+String.6.0=2016,7,20,23,48,17
 
 [Root.Source Files.Config.0.Settings.3]
 String.2.0=Performing Custom Build on $(InputFile)
@@ -518,7 +518,7 @@ Int.1=0
 
 [Root.Source Files.Config.1.Settings.1]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 -istm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc  +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile) 
+String.3.0=cxstm8 -istm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
 String.6.0=2016,6,4,17,10,46
@@ -537,24 +537,14 @@ String.4.0=
 String.5.0=
 String.6.0=2016,6,4,17,10,46
 
-[Root.Source Files.interrupts.c]
-ElemType=File
-PathName=interrupts.c
-Next=Root.Source Files.main.c
-
 [Root.Source Files.main.c]
 ElemType=File
 PathName=main.c
-Next=Root.Source Files.spi.c
+Next=Root.Source Files.stm8s_it.c
 
-[Root.Source Files.spi.c]
+[Root.Source Files.stm8s_it.c]
 ElemType=File
-PathName=spi.c
-Next=Root.Source Files.stm8_interrupt_vector.c
-
-[Root.Source Files.stm8_interrupt_vector.c]
-ElemType=File
-PathName=stm8_interrupt_vector.c
+PathName=stm8s_it.c
 Next=Root.Source Files.uart.c
 
 [Root.Source Files.uart.c]
@@ -564,7 +554,7 @@ PathName=uart.c
 [Root.Include Files]
 ElemType=Folder
 PathName=Include Files
-Child=Root.Include Files.interrupts.h
+Child=Root.Include Files.pitches.h
 Config.0=Root.Include Files.Config.0
 Config.1=Root.Include Files.Config.1
 
@@ -588,17 +578,17 @@ Int.1=0
 
 [Root.Include Files.Config.0.Settings.1]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 +mods0 -customDebCompat -customOpt-no -customC-pp -customLst -l -dSTM8S003 -istm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
+String.3.0=cxstm8 +mods0 -customOpt +compact -ga -customC-pp -customLst-l -dSTM8S003 -istm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
-String.6.0=2016,6,4,17,23,52
+String.6.0=2016,7,20,23,48,17
 
 [Root.Include Files.Config.0.Settings.2]
 String.2.0=Assembling $(InputFile)...
-String.3.0=castm8 -xx -l $(ToolsetIncOpts) -o$(IntermPath)$(InputName).$(ObjectExt) $(InputFile)
+String.3.0=castm8 -l $(ToolsetIncOpts) -o$(IntermPath)$(InputName).$(ObjectExt) $(InputFile)
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
-String.6.0=2016,6,4,17,10,46
+String.6.0=2016,7,20,23,48,17
 
 [Root.Include Files.Config.0.Settings.3]
 String.2.0=Performing Custom Build on $(InputFile)
@@ -615,7 +605,7 @@ Int.1=0
 
 [Root.Include Files.Config.1.Settings.1]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 -istm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc  +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile) 
+String.3.0=cxstm8 -istm8s_stdperiph_lib\libraries\stm8s_stdperiph_driver\inc +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
 String.6.0=2016,6,4,17,10,46
@@ -634,24 +624,24 @@ String.4.0=
 String.5.0=
 String.6.0=2016,6,4,17,10,46
 
-[Root.Include Files.interrupts.h]
+[Root.Include Files.pitches.h]
 ElemType=File
-PathName=interrupts.h
+PathName=pitches.h
 Next=Root.Include Files.ports_definition.h
 
 [Root.Include Files.ports_definition.h]
 ElemType=File
 PathName=ports_definition.h
-Next=Root.Include Files.spi.h
-
-[Root.Include Files.spi.h]
-ElemType=File
-PathName=spi.h
 Next=Root.Include Files.stm8s_conf.h
 
 [Root.Include Files.stm8s_conf.h]
 ElemType=File
 PathName=stm8s_conf.h
+Next=Root.Include Files.stm8s_it.h
+
+[Root.Include Files.stm8s_it.h]
+ElemType=File
+PathName=stm8s_it.h
 Next=Root.Include Files.uart.h
 
 [Root.Include Files.uart.h]

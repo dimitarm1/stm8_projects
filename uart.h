@@ -36,7 +36,7 @@ void uart_write(char *str);
 void printUint(U8 *val, U8 len);
 void print_long(long Number);
 void error_msg(char *msg);
-void uart_init();
+void UART_Config(void);
 U8 UART_read_byte(U8 *byte);
 void printUHEX(U8 val);
 

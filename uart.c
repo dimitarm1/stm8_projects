@@ -27,15 +27,6 @@ U8 UART_rx[UART_BUF_LEN]; // cycle buffer for received data
 U8 UART_rx_start_i = 0;   // started index of received data (from which reading starts)
 U8 UART_rx_cur_i = 0;     // index of current first byte in rx array (to which data will be written)
 
-/**
- * Send one byte through UART
- * @param byte - data to send
- */
-void UART_send_byte(U8 byte){
-	while(!(UART2_SR & UART_SR_TXE)); // wait until previous byte transmitted
-	UART2_DR = byte;
-}
-
 
 U8 U8toHEX(U8 val){
 	val &= 0x0f;
@@ -52,11 +43,11 @@ void printUHEX(U8 val){
 
 
 /**
-  * @brief  UART1 and UART3 Configuration for interrupt communication
+  * @brief  UART1 Configuration for interrupt communication
   * @param  None
   * @retval None
   */
-static void UART_Config(void)
+void UART_Config(void)
 {
   /* Deinitializes the UART1 and UART3 peripheral */
     UART1_DeInit();
@@ -76,7 +67,7 @@ static void UART_Config(void)
     /* Enable UART1 Transmit interrupt*/
 //    UART1_ITConfig(UART1_IT_TXE, ENABLE);
 
-    UART1_ITConfig(UART3_IT_RXNE_OR, ENABLE);
+    UART1_ITConfig(UART1_IT_RXNE_OR, ENABLE);
 
     /* Enable general interrupts */
     enableInterrupts();

@@ -54,23 +54,12 @@
 void Delay(uint16_t nCount);
 static void TIM1_Config(void);
 static void TIM4_Config(void);
+static void clear_notes(void);
+static void get_next_note(void);
 /* Private functions ---------------------------------------------------------*/
 /* Public functions ----------------------------------------------------------*/
 /* Global val\riables --------------------------------------------------------*/
 unsigned long Global_time = 0L; // global time in ms
-
-
-
-/**
-* Unlock data EEPROM
-*/
-void
-flash_init(void)
-{
-//        FLASH_DUCR = 0xAE;
-//        FLASH_DUCR = 0x56;
-}
-
 
 /**
   * @brief  Configure TIM1 to generate 3 complementary signals, to insert a 
@@ -361,7 +350,7 @@ int main(void)
 //  }
 
 	//spi_init();
-	uart_init();
+    UART_Config();
 
     TIM1_Config();
     TIM4_Config();
@@ -538,7 +527,7 @@ void push_note(int pitch, int duration){
 	TIM4->IER |= TIM4_IER_UIE; // Enable interrupt on update event
 }
 
-void get_next_note(){
+static void get_next_note(void){
 
 	if(start_note == end_note){
 		TIM4->IER &= ~TIM4_IER_UIE; // Disable interrupt on update event
@@ -549,7 +538,7 @@ void get_next_note(){
 	}
 }
 
-void clear_notes(){
+static void clear_notes(void){
 	start_note = end_note = 0;
 	buzz_counter = 0;
 }
@@ -607,11 +596,11 @@ void ProcessSensors(void)
 		last_key_states[2] = !!key_states[2];
 		if(!last_key_states[2]) KeyPressed_2();
 	}
-	if(!last_key_states[4] != !key_states[4])
-		{
-			last_key_states[4] = !!key_states[4];
-			if(!last_key_states[4]) KeyPressed_3();
-		}
+//	if(!last_key_states[4] != !key_states[4])
+//		{
+//			last_key_states[4] = !!key_states[4];
+//			if(!last_key_states[4]) KeyPressed_3();
+//		}
 
 	if ((!key_states[0]| !key_states[3]))
 	{
@@ -693,32 +682,6 @@ void ProcessSensors(void)
 
 
 }
-
-
-#ifdef USE_FULL_ASSERT
-/**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
-void assert_failed(uint8_t* file, uint32_t line)
-{
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-
-  /* Infinite loop */
-//  LED1_OFF;
-//  LED2_ON;
-  for (;;)
-  {
-//    LED1_TOGGLE;
-//    LED2_TOGGLE;
-    SystickDelay(100);
-  }
-}
-#endif
 
 
 /**
@@ -1049,53 +1012,19 @@ void read_eeprom(void){
 }
 
 void write_eeprom(void){
+	flash_struct *flash_mem;
 	volatile int index = 0;
-	FLASH_Unlock();
-	volatile flash_struct flash_mem;
-	uint32_t *p = (uint32_t *)eeprom_array;
-//	uint32_t *p = (uint32_t *)&flash_mem;
-	for(index = 0; index<512; index+=2){
-		if(*(p + index)==0xFFFFFFFF) break;
-	}
-
-//	while((eeprom_array[index]!=0xFFFFFFFFUL)&&(index<(512)))index+=2;
-	if(index > 511){
-		// No more room. Erase the 4 pages
-		FLASH_ErasePage((uint32_t)&eeprom_array[0]);
-		FLASH_ErasePage((uint32_t)&eeprom_array[128]);
-		FLASH_ErasePage((uint32_t)&eeprom_array[256]);
-		FLASH_ErasePage((uint32_t)&eeprom_array[384]);
-		index = 0;
-	}
-	for(index = 0; index<512; index+=2){
-		if(*(p + index)==0xFFFFFFFF) break;
-	}
-	if(index >511){
-		display_data = 0xE01;
-		for (index = 0; index<20; index++){
-			clear_notes();
-
-			push_note(E2,3);
-			push_note(D4,3);
-		}
-	} else {
-		volatile static int sts;
-		p = (uint32_t *)&flash_mem;
-		flash_mem.settings.pre_time = preset_pre_time;
-		flash_mem.settings.cool_time = preset_cool_time;
-		flash_mem.settings.addresse = controller_address & 0x0f;
-		flash_mem.settings.unused = 0x55;
-		flash_mem.time.hours_h = work_hours[0];
-		flash_mem.time.hours_l = work_hours[1];
-		flash_mem.time.minutes = work_hours[2];
-		flash_mem.time.used_flag = 0;
-		sts = FLASH_ProgramWord((uint32_t)&eeprom_array[index],p[0]);
-		sts = FLASH_ProgramWord((uint32_t)&eeprom_array[index+1],p[1]);
-		index = sizeof(flash_mem);
-		index ++;
-//		sts = sts;
-	}
-	FLASH_Lock();
+	FLASH_Unlock( FLASH_MEMTYPE_DATA );
+	flash_mem = (flash_struct *)0x4000;
+	flash_mem->settings.pre_time = preset_pre_time;
+	flash_mem->settings.cool_time = preset_cool_time;
+	flash_mem->settings.addresse = controller_address & 0x0f;
+	flash_mem->settings.unused = 0x55;
+	flash_mem->time.hours_h = work_hours[0];
+	flash_mem->time.hours_l = work_hours[1];
+	flash_mem->time.minutes = work_hours[2];
+	flash_mem->time.used_flag = 0;
+	FLASH_Lock( FLASH_MEMTYPE_DATA );
 }
 
 //-----------------------------------------------------------------------------------------------------
@@ -1103,7 +1032,7 @@ void usart_receive(void){
 	useUart = 1;
 
 	//	USART_ITConfig(USART1,USART_IT_RXNE,DISABLE);
-	data =  USART_ReceiveData(UART1);
+	data =  UART1_ReceiveData8();
 
 	//pre_time_sent = 0, main_time_sent = 0, cool_time_sent = 0;
 
@@ -1115,7 +1044,7 @@ void usart_receive(void){
 		if((data == (0x80U | ((controller_address & 0x0fU)<<3U)))){
 			data = (curr_status<<6)| ToBCD(curr_time);
 //			data = (STATUS_WORKING<<6)|4;
-			USART_SendData(UART1,data);
+			UART1_SendData8(data);
 		}
 		else if (data == ((0x80U | ((controller_address & 0x0fU)<<3U) ))+1) //Command 1 - Start
 		{
@@ -1160,11 +1089,12 @@ void usart_receive(void){
 			rx_state = 0;
 		}
 		if(rx_state == rx_state_cool_time){
+			int checksum;
 			cool_time_sent = data;
 			rx_state = rx_state_get_checksum;
-			int checksum = (pre_time_sent + cool_time_sent  - time_in_hex - 5) & 0x7F;
+			checksum = (pre_time_sent + cool_time_sent  - time_in_hex - 5) & 0x7F;
 			data = checksum;
-			USART_SendData(UART1,data);
+			UART1_SendData8(data);
 		}
 
 
